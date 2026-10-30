@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+  <style>
+    .bg-shield { fill: #0F0F12; stroke: #27272A; }
+    @media (prefers-color-scheme: light) {
+      .bg-shield { fill: #121216; stroke: #E63946; }
+    }
+  </style>
+  <!-- Octagonal Tactical Shield -->
+  <polygon class="bg-shield" points="36,6 84,6 114,36 114,84 84,114 36,114 6,84 6,36" stroke-width="5" stroke-linejoin="round" />
+  
+  <!-- Left Lapel (Crimson) -->
+  <path d="M36,24 L60,64 L48,84 L22,40 Z" fill="#E63946" />
+  
+  <!-- Right Lapel (White) -->
+  <path d="M84,24 L60,64 L72,84 L98,40 Z" fill="#F8FAFC" />
+  
+  <!-- Black Belt Bar & Ranking Stripes -->
+  <rect x="22" y="76" width="76" height="14" rx="3" fill="#09090B" stroke="#F8FAFC" stroke-width="2" />
+  <rect x="70" y="78" width="18" height="10" fill="#E63946" />
+  <line x1="75" y1="78" x2="75" y2="88" stroke="#F8FAFC" stroke-width="2" />
+  <line x1="80" y1="78" x2="80" y2="88" stroke="#F8FAFC" stroke-width="2" />
+  <line x1="85" y1="78" x2="85" y2="88" stroke="#F8FAFC" stroke-width="2" />
+</svg>
