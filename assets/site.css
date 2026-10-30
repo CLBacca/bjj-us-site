@@ -51,7 +51,7 @@ p { margin: 0; }
 .site-header { border-bottom: 1px solid var(--border); }
 .site-header .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 16px; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font: 600 22px/1 var(--display); letter-spacing: 1px; }
-.brand svg { width: 34px; height: 34px; }
+.brand img { width: 34px; height: 34px; }
 .site-nav { display: flex; gap: 22px; font-size: 15px; }
 .site-nav a { text-decoration: none; color: var(--soft); }
 .site-nav a:hover { color: var(--text); }
@@ -78,7 +78,7 @@ p { margin: 0; }
 .hero h1 em { font-style: normal; color: var(--red); }
 .hero .lede { font-size: 20px; color: var(--soft); max-width: 34ch; }
 .hero .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 34px; }
-.hero .crest { justify-self: center; width: min(320px, 70vw); filter: drop-shadow(0 20px 60px rgba(230, 57, 70, .25)); }
+.hero .crest { justify-self: center; width: min(320px, 70vw); height: auto; filter: drop-shadow(0 20px 60px rgba(230, 57, 70, .25)); }
 @media (max-width: 800px) {
   .hero { padding: 56px 0 64px; }
   .hero .wrap { grid-template-columns: 1fr; }
