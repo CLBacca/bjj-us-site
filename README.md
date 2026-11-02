@@ -15,6 +15,7 @@ GitHub Pages (A records 185.199.108-111.153, `www` CNAME clbacca.github.io).
 | `/privacy/gym-template/` | Privacy policy template gyms adapt for their own websites |
 | `/terms/` | Terms of Use — linked from the app |
 | `/support/` | Support / FAQ — App Store support URL |
+| `/waiver/?gym=<subdomain>` | A gym's waiver for trial students (no account yet); `&t=<token>` is a lead's personal link. Talks to `api.bjj-us.com/public/waiver` (JJ APP `src/waiver_web.py`); locally to `127.0.0.1:8001` |
 
 The privacy pages describe what the app actually stores (see
 `JJ APP/src/account_router.py` for what account deletion erases). Change it in

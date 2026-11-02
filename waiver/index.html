@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Waiver — BJJ-US</title>
+  <meta name="description" content="Sign your gym's waiver before your first class.">
+  <!-- One page per gym (?gym=…), and personal links (&t=…): keep them out of search. -->
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#FFFFFF">
+  <style>
+    /* The gym's page, not BJJ-US marketing: light, plain, in the gym's color
+       (--accent, set from its branding). Fonts are the site's, self-hosted. */
+    @font-face { font-family: 'Oswald'; font-weight: 200 700; font-display: swap; src: url(../assets/fonts/oswald.woff2) format('woff2'); }
+    @font-face { font-family: 'Public Sans'; font-weight: 100 900; font-display: swap; src: url(../assets/fonts/public-sans.woff2) format('woff2'); }
+    :root {
+      --accent: #E63946; --on-accent: #fff;
+      --bg: #F4F4F5; --card: #fff; --ink: #141417; --muted: #5B5B66; --line: #D9D9DE; --error: #B42332;
+      --display: 'Oswald', 'Arial Narrow', Arial, sans-serif;
+      --body: 'Public Sans', -apple-system, 'Segoe UI', Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 var(--body); }
+    .wrap { width: min(720px, 100% - 32px); margin-inline: auto; }
+    header { background: var(--card); border-bottom: 1px solid var(--line); }
+    header .wrap { display: flex; align-items: center; gap: 14px; min-height: 72px; padding: 12px 0; }
+    .logo { width: 48px; height: 48px; border-radius: 10px; object-fit: contain; background: #fff; flex: none; }
+    .initial { width: 48px; height: 48px; border-radius: 10px; display: grid; place-items: center; flex: none;
+               background: var(--accent); color: var(--on-accent); font: 600 24px/1 var(--display); }
+    .gym { font: 600 22px/1.1 var(--display); text-transform: uppercase; letter-spacing: .5px; flex: 1; min-width: 0; overflow-wrap: anywhere; }
+    .lang { border: 1px solid var(--line); background: none; border-radius: 8px; padding: 6px 10px; font: 600 13px var(--body); color: var(--muted); cursor: pointer; }
+    main { padding: 24px 0 48px; }
+    h1 { font: 600 30px/1.1 var(--display); text-transform: uppercase; margin: 0; }
+    .head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+    .steps { display: flex; gap: 6px; }
+    .steps i { width: 26px; height: 6px; border-radius: 3px; background: var(--line); }
+    .steps i.on { background: var(--accent); }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; margin-bottom: 14px; }
+    .card h2 { font: 700 13px/1.2 var(--body); letter-spacing: 1.5px; text-transform: uppercase; margin: 0 0 14px; color: var(--muted); }
+    label.field { display: block; margin-bottom: 14px; }
+    label.field > span { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .req { color: var(--error); }
+    input[type=text], input[type=email], input[type=tel], input[type=date] {
+      width: 100%; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 10px;
+      font: 16px var(--body); color: var(--ink); background: #fff; }
+    input:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 520px) { .row { grid-template-columns: 1fr; gap: 0; } }
+    .choice { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; cursor: pointer; }
+    .choice input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--accent); flex: none; }
+    .kid { border-top: 1px solid var(--line); padding-top: 14px; margin-top: 4px; }
+    .kid-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-weight: 600; }
+    .link { background: none; border: 0; padding: 4px 0; color: var(--ink); text-decoration: underline; font: 600 15px var(--body); cursor: pointer; }
+    .waiver-text { white-space: pre-wrap; max-height: 360px; overflow-y: auto; border: 1px solid var(--line); border-radius: 10px;
+                   padding: 14px; font-size: 14px; line-height: 1.5; background: #FAFAFA; }
+    .sig-box { position: relative; border: 1.5px dashed var(--muted); border-radius: 10px; background: #fff; }
+    canvas { display: block; width: 100%; height: 180px; touch-action: none; cursor: crosshair; border-radius: 10px; }
+    .sig-hint { position: absolute; left: 14px; bottom: 10px; color: var(--muted); font-size: 13px; pointer-events: none; }
+    .sig-line { position: absolute; left: 14px; right: 14px; bottom: 34px; border-bottom: 1px solid var(--line); pointer-events: none; }
+    .actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 6px; flex-wrap: wrap; }
+    .btn { border: 0; border-radius: 10px; padding: 14px 24px; font: 700 15px var(--body); letter-spacing: .5px; text-transform: uppercase; cursor: pointer;
+           background: var(--accent); color: var(--on-accent); }
+    .btn.secondary { background: #E4E4E7; color: var(--ink); }
+    .btn:disabled { opacity: .5; cursor: default; }
+    .error { color: var(--error); font-weight: 600; margin: 8px 0; }
+    .muted { color: var(--muted); font-size: 14px; }
+    .done { text-align: center; padding: 36px 20px; }
+    .done .check { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; margin: 0 auto 16px;
+                   background: var(--accent); color: var(--on-accent); font-size: 34px; }
+    .done h1 { margin-bottom: 10px; }
+    footer { padding: 8px 0 32px; color: var(--muted); font-size: 13px; }
+    footer a { color: inherit; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <span id="mark" class="initial" aria-hidden="true">B</span>
+      <div class="gym" id="gym-name">BJJ-US</div>
+      <button class="lang" id="lang" type="button" aria-label="Português / English">PT</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <p id="loading" class="muted" data-t="loading">Loading…</p>
+    <div id="fatal" class="card" hidden><p class="error" id="fatal-text"></p></div>
+
+    <form id="form" hidden novalidate>
+      <div class="head">
+        <h1 data-t="title">Waiver</h1>
+        <div class="steps" aria-hidden="true"><i id="dot1" class="on"></i><i id="dot2"></i><i id="dot3"></i></div>
+      </div>
+
+      <!-- Step 1: who, and contact details -->
+      <section id="step1">
+        <div class="card">
+          <h2 data-t="who">Who are you signing for?</h2>
+          <label class="choice"><input type="radio" name="for" value="SELF" checked><span data-t="self">Myself (18+)</span></label>
+          <label class="choice"><input type="radio" name="for" value="MINOR"><span data-t="minor">A participant under 18 (I'm their parent or guardian)</span></label>
+        </div>
+
+        <div class="card">
+          <h2 id="contact-title" data-t="contactSelf">Your contact info</h2>
+          <div class="row">
+            <label class="field"><span><span data-t="first">First name</span> <span class="req">*</span></span><input type="text" id="first" autocomplete="given-name" maxlength="60" required></label>
+            <label class="field"><span><span data-t="last">Last name</span> <span class="req">*</span></span><input type="text" id="last" autocomplete="family-name" maxlength="60" required></label>
+          </div>
+          <label class="field"><span><span data-t="email">Email</span> <span class="req">*</span></span><input type="email" id="email" autocomplete="email" maxlength="254" required></label>
+          <label class="field"><span><span data-t="phone">Phone</span> <span class="req">*</span></span><input type="tel" id="phone" autocomplete="tel" maxlength="32" pattern="[+0-9 ().\-]{7,32}" required></label>
+        </div>
+
+        <div class="card" id="kids-card" hidden>
+          <h2 data-t="participants">Participants under 18</h2>
+          <div id="kids"></div>
+          <button type="button" class="link" id="add-kid" data-t="addKid">+ Add another child</button>
+        </div>
+
+        <p class="error" id="error1" hidden></p>
+        <div class="actions"><button type="button" class="btn" id="next" data-t="next">Next</button></div>
+      </section>
+
+      <!-- Step 2: read and sign -->
+      <section id="step2" hidden>
+        <div class="card">
+          <h2 data-t="read">Read the waiver</h2>
+          <div class="waiver-text" id="waiver-text" tabindex="0"></div>
+        </div>
+
+        <div class="card">
+          <h2 data-t="sign">Sign</h2>
+          <label class="choice"><input type="checkbox" id="health"><span id="health-text"></span></label>
+          <label class="choice"><input type="checkbox" id="esign"><span data-t="esign">I agree to sign this waiver electronically, and that my electronic signature is as valid as one on paper.</span></label>
+          <label class="field" style="margin-top:10px"><span><span data-t="typed">Type your full name</span> <span class="req">*</span></span><input type="text" id="typed" autocomplete="name" maxlength="120"></label>
+          <span style="display:block;font-size:14px;font-weight:600;margin-bottom:6px"><span data-t="draw">Sign here with your finger or mouse</span> <span class="req">*</span></span>
+          <div class="sig-box">
+            <canvas id="sig" aria-label="Signature pad"></canvas>
+            <div class="sig-line"></div>
+            <span class="sig-hint" id="sig-hint" data-t="drawHint">Sign above the line</span>
+          </div>
+          <div class="actions" style="justify-content:flex-start"><button type="button" class="link" id="clear" data-t="clear">Clear signature</button></div>
+        </div>
+
+        <p class="error" id="error2" hidden></p>
+        <div class="actions">
+          <button type="button" class="btn secondary" id="back" data-t="back">Back</button>
+          <button type="submit" class="btn" id="submit" data-t="submit">Sign waiver</button>
+        </div>
+      </section>
+    </form>
+
+    <!-- Step 3 -->
+    <section id="done" class="card done" hidden>
+      <div class="check" aria-hidden="true">✓</div>
+      <h1 data-t="doneTitle">Signed. Thank you!</h1>
+      <p id="done-text"></p>
+      <p class="muted" id="done-contact" style="margin-top:12px"></p>
+    </section>
+
+    <p class="muted" id="privacy-note" hidden></p>
+  </main>
+
+  <footer>
+    <div class="wrap"><span data-t="powered">Powered by</span> <a href="../">BJJ-US</a> · <a href="../privacy/app/#waiver" data-t="privacy">Privacy</a></div>
+  </footer>
+
+  <script>
+  (() => {
+    'use strict';
+    const API = ['localhost', '127.0.0.1'].includes(location.hostname) ? 'http://127.0.0.1:8001' : 'https://api.bjj-us.com';
+    const MAX_KIDS = 8;
+
+    const T = {
+      en: {
+        loading: 'Loading…', title: 'Waiver', who: 'Who are you signing for?', self: 'Myself (18+)',
+        minor: "A participant under 18 (I'm their parent or guardian)", contactSelf: 'Your contact info',
+        contactGuardian: 'Parent or guardian contact info', first: 'First name', last: 'Last name', email: 'Email',
+        phone: 'Phone', participants: 'Participants under 18', child: 'Child {n}', remove: 'Remove', dob: 'Date of birth',
+        addKid: '+ Add another child', next: 'Next', read: 'Read the waiver', sign: 'Sign',
+        healthSelf: 'I am fit to train, I will consult a doctor if I am unsure, and I will tell my professor about any injuries or medical conditions.',
+        healthKid: 'As their parent or guardian: they are fit to train, I will consult a doctor if I am unsure, and we will tell their professor about any injuries or medical conditions.',
+        esign: 'I agree to sign this waiver electronically, and that my electronic signature is as valid as one on paper.',
+        typed: 'Type your full name', draw: 'Sign here with your finger or mouse', drawHint: 'Sign above the line',
+        clear: 'Clear signature', back: 'Back', submit: 'Sign waiver', sending: 'Signing…',
+        doneTitle: 'Signed. Thank you!', doneText: 'We emailed a copy to {email}. See you on the mat!',
+        contact: 'Questions? Contact {gym}{how}.', powered: 'Powered by', privacy: 'Privacy',
+        privacyNote: 'Your details and signature go to {gym}, and BJJ-US stores them on the gym’s behalf.',
+        errFields: 'Please fill in the highlighted fields.', errKid: 'Add each child’s name and date of birth.',
+        errHealth: 'Please confirm the health declaration.', errEsign: 'Please agree to sign electronically.',
+        errTyped: 'Please type your full name.', errSig: 'Please sign in the box.',
+        errNoGym: 'This link is missing the gym. Ask your gym for its waiver link.',
+        errNotFound: 'We couldn’t find this gym’s waiver. Ask your gym for its waiver link.',
+        errNetwork: 'Couldn’t reach the server. Check your connection and try again.',
+        errBusy: 'Too many attempts. Please wait a minute and try again.',
+        errChanged: 'The gym just updated its waiver. Reload the page to read the new version.',
+      },
+      pt: {
+        loading: 'Carregando…', title: 'Termo de responsabilidade', who: 'Para quem você está assinando?', self: 'Para mim (18+)',
+        minor: 'Para um participante menor de 18 anos (sou o responsável)', contactSelf: 'Seus dados de contato',
+        contactGuardian: 'Dados do responsável', first: 'Nome', last: 'Sobrenome', email: 'E-mail',
+        phone: 'Telefone', participants: 'Participantes menores de 18', child: 'Criança {n}', remove: 'Remover', dob: 'Data de nascimento',
+        addKid: '+ Adicionar outra criança', next: 'Próximo', read: 'Leia o termo', sign: 'Assinar',
+        healthSelf: 'Estou apto(a) a treinar, vou consultar um médico se tiver dúvidas e vou informar meu professor sobre lesões ou condições médicas.',
+        healthKid: 'Como responsável: a criança está apta a treinar, vou consultar um médico se tiver dúvidas e vamos informar o professor sobre lesões ou condições médicas.',
+        esign: 'Concordo em assinar este termo eletronicamente, e que minha assinatura eletrônica vale tanto quanto uma em papel.',
+        typed: 'Digite seu nome completo', draw: 'Assine aqui com o dedo ou o mouse', drawHint: 'Assine acima da linha',
+        clear: 'Limpar assinatura', back: 'Voltar', submit: 'Assinar termo', sending: 'Assinando…',
+        doneTitle: 'Assinado. Obrigado!', doneText: 'Enviamos uma cópia para {email}. Até o tatame!',
+        contact: 'Dúvidas? Fale com {gym}{how}.', powered: 'Desenvolvido por', privacy: 'Privacidade',
+        privacyNote: 'Seus dados e sua assinatura vão para {gym}, e a BJJ-US os guarda em nome da academia.',
+        errFields: 'Preencha os campos destacados.', errKid: 'Informe o nome e a data de nascimento de cada criança.',
+        errHealth: 'Confirme a declaração de saúde.', errEsign: 'Concorde em assinar eletronicamente.',
+        errTyped: 'Digite seu nome completo.', errSig: 'Assine no quadro.',
+        errNoGym: 'Este link está sem a academia. Peça à sua academia o link do termo.',
+        errNotFound: 'Não encontramos o termo desta academia. Peça à sua academia o link do termo.',
+        errNetwork: 'Não foi possível conectar ao servidor. Verifique sua conexão e tente de novo.',
+        errBusy: 'Muitas tentativas. Aguarde um minuto e tente de novo.',
+        errChanged: 'A academia acabou de atualizar o termo. Recarregue a página para ler a nova versão.',
+      },
+    };
+
+    const $ = (id) => document.getElementById(id);
+    const params = new URLSearchParams(location.search);
+    const gymSlug = (params.get('gym') || '').trim().toLowerCase();
+    const token = params.get('t');
+    let lang = (navigator.language || '').toLowerCase().startsWith('pt') ? 'pt' : 'en';
+    try { lang = localStorage.getItem('waiver.lang') || lang; } catch (e) { /* private mode */ }
+    let data = null;     // GET /public/waiver/{gym}
+    let signed = null;   // the email the copy went to
+
+    const t = (key, vars) => (T[lang][key] || T.en[key] || key).replace(/\{(\w+)\}/g, (_, k) => (vars && vars[k] != null ? vars[k] : ''));
+
+    function applyLang() {
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+      document.querySelectorAll('[data-t]').forEach((el) => { el.textContent = t(el.dataset.t); });
+      $('lang').textContent = lang === 'pt' ? 'EN' : 'PT';
+      if (data) {
+        $('privacy-note').textContent = t('privacyNote', { gym: data.gym.name });
+        renderKids();
+      }
+      syncFor();
+      if (signed) showDone();
+    }
+
+    $('lang').addEventListener('click', () => {
+      lang = lang === 'pt' ? 'en' : 'pt';
+      try { localStorage.setItem('waiver.lang', lang); } catch (e) { /* private mode */ }
+      applyLang();
+    });
+
+    // ── Branding ────────────────────────────────────────────────────────────
+    function brand(gym) {
+      document.title = `${t('title')} — ${gym.name}`;
+      $('gym-name').textContent = gym.name;
+      const hex = /^#[0-9a-f]{6}$/i.test(gym.theme_primary_hex || '') ? gym.theme_primary_hex : null;
+      if (hex) {
+        const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255);
+        const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        // A very light brand color would vanish on white: use ink instead.
+        document.documentElement.style.setProperty('--accent', lum > 0.85 ? '#141417' : hex);
+        document.documentElement.style.setProperty('--on-accent', lum > 0.6 && lum <= 0.85 ? '#141417' : '#fff');
+      }
+      const mark = $('mark');
+      if (gym.logo_url && /^https:\/\//.test(gym.logo_url)) {
+        const img = document.createElement('img');
+        img.className = 'logo';
+        img.alt = '';
+        img.src = gym.logo_url;
+        mark.replaceWith(img);
+      } else {
+        mark.textContent = gym.name.trim().charAt(0).toUpperCase();
+      }
+    }
+
+    // ── Step 1 ──────────────────────────────────────────────────────────────
+    let kids = [{ first: '', last: '', dob: '' }];
+    const signingFor = () => document.querySelector('input[name=for]:checked').value;
+
+    function syncFor() {
+      const minor = signingFor() === 'MINOR';
+      if (minor && kids.length === 1 && !kids[0].last && $('last').value.trim()) {
+        kids[0].last = $('last').value.trim();
+        renderKids();
+      }
+      $('kids-card').hidden = !minor;
+      $('contact-title').textContent = t(minor ? 'contactGuardian' : 'contactSelf');
+      $('health-text').textContent = t(minor ? 'healthKid' : 'healthSelf');
+    }
+    document.querySelectorAll('input[name=for]').forEach((el) => el.addEventListener('change', syncFor));
+
+    function renderKids() {
+      const box = $('kids');
+      box.textContent = '';
+      const today = new Date().toISOString().slice(0, 10);
+      kids.forEach((kid, i) => {
+        const wrap = document.createElement('div');
+        wrap.className = 'kid';
+        wrap.innerHTML = `
+          <div class="kid-head"><span></span>${kids.length > 1 ? '<button type="button" class="link"></button>' : ''}</div>
+          <div class="row">
+            <label class="field"><span><span class="l-first"></span> <span class="req">*</span></span><input type="text" maxlength="60" data-k="first"></label>
+            <label class="field"><span><span class="l-last"></span> <span class="req">*</span></span><input type="text" maxlength="60" data-k="last"></label>
+          </div>
+          <label class="field"><span><span class="l-dob"></span> <span class="req">*</span></span><input type="date" data-k="dob" max="${today}"></label>`;
+        wrap.querySelector('.kid-head span').textContent = t('child', { n: i + 1 });
+        wrap.querySelector('.l-first').textContent = t('first');
+        wrap.querySelector('.l-last').textContent = t('last');
+        wrap.querySelector('.l-dob').textContent = t('dob');
+        wrap.querySelectorAll('input').forEach((input) => {
+          input.value = kid[input.dataset.k];
+          input.addEventListener('input', () => { kid[input.dataset.k] = input.value; });
+        });
+        const rm = wrap.querySelector('.kid-head button');
+        if (rm) {
+          rm.textContent = t('remove');
+          rm.addEventListener('click', () => { kids.splice(i, 1); renderKids(); });
+        }
+        box.appendChild(wrap);
+      });
+      $('add-kid').hidden = kids.length >= MAX_KIDS;
+    }
+    $('add-kid').addEventListener('click', () => {
+      if (kids.length >= MAX_KIDS) return;
+      // Siblings usually share the last name.
+      kids.push({ first: '', last: (kids[kids.length - 1] || {}).last || $('last').value.trim(), dob: '' });
+      renderKids();
+    });
+
+    function showError(id, message) {
+      $(id).textContent = message || '';
+      $(id).hidden = !message;
+    }
+
+    function step(n) {
+      $('step1').hidden = n !== 1;
+      $('step2').hidden = n !== 2;
+      $('dot1').className = 'on';
+      $('dot2').className = n >= 2 ? 'on' : '';
+      $('dot3').className = n >= 3 ? 'on' : '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (n === 2) requestAnimationFrame(sizePad);
+    }
+
+    $('next').addEventListener('click', () => {
+      showError('error1', '');
+      const fields = ['first', 'last', 'email', 'phone'].map($);
+      const bad = fields.find((f) => !f.value.trim() || !f.checkValidity());
+      if (bad) { showError('error1', t('errFields')); bad.focus(); return; }
+      if (signingFor() === 'MINOR' && kids.some((k) => !k.first.trim() || !k.last.trim() || !k.dob)) {
+        showError('error1', t('errKid'));
+        return;
+      }
+      if (!$('typed').value) $('typed').value = `${$('first').value.trim()} ${$('last').value.trim()}`;
+      step(2);
+    });
+    $('back').addEventListener('click', () => step(1));
+
+    // ── Signature pad: strokes kept in 0–1 coordinates, so a resize or
+    //    rotation redraws them instead of losing them. ───────────────────────
+    const pad = $('sig');
+    const ctx = pad.getContext('2d');
+    let strokes = [];
+    let current = null;
+
+    function draw(target, w, h, lineWidth) {
+      target.lineCap = 'round';
+      target.lineJoin = 'round';
+      target.strokeStyle = '#111';
+      target.lineWidth = lineWidth;
+      for (const s of strokes) {
+        target.beginPath();
+        s.forEach(([x, y], i) => (i ? target.lineTo(x * w, y * h) : target.moveTo(x * w, y * h)));
+        if (s.length === 1) target.lineTo(s[0][0] * w + 0.1, s[0][1] * h);
+        target.stroke();
+      }
+    }
+    function redraw() {
+      const r = pad.getBoundingClientRect();
+      ctx.clearRect(0, 0, r.width, r.height);
+      draw(ctx, r.width, r.height, 2.5);
+    }
+    function sizePad() {
+      const r = pad.getBoundingClientRect();
+      if (!r.width) return;
+      const dpr = window.devicePixelRatio || 1;
+      pad.width = Math.round(r.width * dpr);
+      pad.height = Math.round(r.height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      redraw();
+    }
+    window.addEventListener('resize', sizePad);
+    function point(e) {
+      const r = pad.getBoundingClientRect();
+      return [(e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height];
+    }
+    pad.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      pad.setPointerCapture(e.pointerId);
+      current = [point(e)];
+      strokes.push(current);
+      $('sig-hint').hidden = true;
+      showError('error2', '');
+      redraw();
+    });
+    pad.addEventListener('pointermove', (e) => {
+      if (!current) return;
+      e.preventDefault();
+      current.push(point(e));
+      redraw();
+    });
+    ['pointerup', 'pointercancel', 'pointerleave'].forEach((ev) => pad.addEventListener(ev, () => { current = null; }));
+    $('clear').addEventListener('click', () => { strokes = []; $('sig-hint').hidden = false; redraw(); });
+
+    // A small PNG on white (dark-mode mail apps show it on dark otherwise).
+    function signaturePng() {
+      const out = document.createElement('canvas');
+      out.width = 900;
+      out.height = 300;
+      const c = out.getContext('2d');
+      c.fillStyle = '#fff';
+      c.fillRect(0, 0, out.width, out.height);
+      draw(c, out.width, out.height, 5);
+      return out.toDataURL('image/png');
+    }
+    const inked = () => strokes.reduce((n, s) => n + s.length, 0) >= 8;
+
+    // ── Submit ──────────────────────────────────────────────────────────────
+    function apiError(status, body) {
+      if (status === 409) return t('errChanged');
+      if (status === 429) return t('errBusy');
+      const detail = body && body.detail;
+      if (typeof detail === 'string') return detail;
+      if (Array.isArray(detail) && detail[0] && detail[0].msg) return String(detail[0].msg).replace(/^Value error, /, '');
+      return t('errNetwork');
+    }
+
+    $('form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      showError('error2', '');
+      if (!$('health').checked) return showError('error2', t('errHealth'));
+      if (!$('esign').checked) return showError('error2', t('errEsign'));
+      if ($('typed').value.trim().length < 2) return showError('error2', t('errTyped'));
+      if (!inked()) return showError('error2', t('errSig'));
+
+      const minor = signingFor() === 'MINOR';
+      const payload = {
+        version: data.version,
+        t: token || undefined,
+        signing_for: minor ? 'MINOR' : 'SELF',
+        first_name: $('first').value.trim(),
+        last_name: $('last').value.trim(),
+        email: $('email').value.trim(),
+        phone: $('phone').value.trim() || undefined,
+        participants: minor ? kids.map((k) => ({ first_name: k.first.trim(), last_name: k.last.trim(), date_of_birth: k.dob })) : [],
+        typed_name: $('typed').value.trim(),
+        esign_consent: true,
+        health_declared: true,
+        signature_png: signaturePng(),
+      };
+      const btn = $('submit');
+      btn.disabled = true;
+      btn.textContent = t('sending');
+      try {
+        const res = await fetch(`${API}/public/waiver/${encodeURIComponent(gymSlug)}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const body = await res.json().catch(() => null);
+        if (!res.ok) throw new Error(apiError(res.status, body));
+        signed = payload.email;
+        showDone();
+      } catch (err) {
+        showError('error2', err instanceof TypeError ? t('errNetwork') : err.message);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = t('submit');
+      }
+    });
+
+    function showDone() {
+      $('form').hidden = true;
+      $('done').hidden = false;
+      $('done-text').textContent = t('doneText', { email: signed });
+      const g = data.gym;
+      const how = [g.contact_email, g.contact_phone].filter(Boolean).join(' · ');
+      $('done-contact').textContent = t('contact', { gym: g.name, how: how ? `: ${how}` : '' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ── Load ────────────────────────────────────────────────────────────────
+    function fatal(message) {
+      $('loading').hidden = true;
+      $('fatal').hidden = false;
+      $('fatal-text').textContent = message;
+    }
+
+    async function load() {
+      applyLang();
+      if (!/^[a-z0-9-]{1,63}$/.test(gymSlug)) return fatal(t('errNoGym'));
+      let res;
+      try {
+        res = await fetch(`${API}/public/waiver/${encodeURIComponent(gymSlug)}${token ? `?t=${encodeURIComponent(token)}` : ''}`);
+      } catch (e) {
+        return fatal(t('errNetwork'));
+      }
+      if (res.status === 404) return fatal(t('errNotFound'));
+      if (!res.ok) return fatal(res.status === 429 ? t('errBusy') : t('errNetwork'));
+      data = await res.json();
+      brand(data.gym);
+      $('waiver-text').textContent = data.text;
+      const p = data.prefill;
+      if (p) {
+        [['first', p.first_name], ['last', p.last_name], ['email', p.email], ['phone', p.phone]]
+          .forEach(([id, v]) => { if (v) $(id).value = v; });
+      }
+      $('loading').hidden = true;
+      $('form').hidden = false;
+      $('privacy-note').hidden = false;
+      applyLang();
+    }
+
+    load();
+  })();
+  </script>
+</body>
+</html>
