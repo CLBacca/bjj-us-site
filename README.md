@@ -13,6 +13,7 @@ GitHub Pages (A records 185.199.108-111.153, `www` CNAME clbacca.github.io).
 | `/privacy/` | Privacy Policy for Gyms — BJJ-US as the gyms' service provider |
 | `/privacy/app/` | App Privacy Notice for members — linked from the app and App Store Connect |
 | `/privacy/gym-template/` | Privacy policy template gyms adapt for their own websites |
+| `/privacy/connection-bjj/` | Connection BJJ Academy's own privacy policy, hosted for the gym (email and phone load live from Gym details) |
 | `/terms/` | Terms of Use — linked from the app |
 | `/support/` | Support / FAQ — App Store support URL |
 | `/waiver/?gym=<subdomain>` | A gym's waiver for trial students (no account yet); `&t=<token>` is a lead's personal link. Talks to `api.bjj-us.com/public/waiver` (JJ APP `src/waiver_web.py`); locally to `127.0.0.1:8001` |
