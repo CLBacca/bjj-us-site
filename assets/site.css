@@ -93,6 +93,9 @@ section { padding: 88px 0; }
 
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 @media (max-width: 860px) { .grid-3 { grid-template-columns: 1fr; } }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+@media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } }
+.card p { color: var(--soft); }
 .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 30px; }
 .card h3 { font-size: 26px; margin-bottom: 14px; }
 .card .who { font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 8px; }
@@ -124,6 +127,12 @@ section { padding: 88px 0; }
 }
 @media (max-width: 860px) { .steps { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 520px) { .steps { grid-template-columns: 1fr; } }
+.steps.three { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 760px) { .steps.three { grid-template-columns: 1fr; } }
+.step h3 { font-size: 22px; margin-bottom: 8px; }
+.light .step p { color: var(--ink-muted); }
+.footnote { margin-top: 28px; font-size: 16px; }
+.light .footnote { color: var(--ink-muted); }
 
 /* Call to action */
 .cta { text-align: center; background: radial-gradient(circle at 50% 0%, #3A161A 0%, var(--bg) 60%); }
