@@ -67,6 +67,7 @@
     .btn.secondary { background: #E4E4E7; color: var(--ink); }
     .btn:disabled { opacity: .5; cursor: default; }
     .error { color: var(--error); font-weight: 600; margin: 8px 0; }
+    #fatal a { color: var(--accent); font-weight: 600; }
     .muted { color: var(--muted); font-size: 14px; }
     .done { text-align: center; padding: 36px 20px; }
     .done .check { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; margin: 0 auto 16px;
@@ -80,7 +81,7 @@
 <body>
   <header>
     <div class="wrap">
-      <span id="mark" class="initial" aria-hidden="true">B</span>
+      <img id="mark" class="logo" src="../assets/logo.svg" alt="" width="48" height="48">
       <div class="gym" id="gym-name">BJJ-US</div>
       <button class="lang" id="lang" type="button" aria-label="Português / English">PT</button>
     </div>
@@ -88,7 +89,7 @@
 
   <main class="wrap">
     <p id="loading" class="muted" data-t="loading">Loading…</p>
-    <div id="fatal" class="card" hidden><p class="error" id="fatal-text"></p></div>
+    <div id="fatal" class="card" hidden><p class="error" id="fatal-text"></p><p class="muted"><a href="../" data-t="home">Go to bjj-us.com</a></p></div>
 
     <form id="form" hidden novalidate>
       <div class="head">
@@ -193,6 +194,7 @@
         errHealth: 'Please confirm the health declaration.', errEsign: 'Please agree to sign electronically.',
         errTyped: 'Please type your full name.', errSig: 'Please sign in the box.',
         errNoGym: 'This link is missing the gym. Ask your gym for its waiver link.',
+        home: 'Go to bjj-us.com',
         errNotFound: 'We couldn’t find this gym’s waiver. Ask your gym for its waiver link.',
         errNetwork: 'Couldn’t reach the server. Check your connection and try again.',
         errBusy: 'Too many attempts. Please wait a minute and try again.',
@@ -216,6 +218,7 @@
         errHealth: 'Confirme a declaração de saúde.', errEsign: 'Concorde em assinar eletronicamente.',
         errTyped: 'Digite seu nome completo.', errSig: 'Assine no quadro.',
         errNoGym: 'Este link está sem a academia. Peça à sua academia o link do termo.',
+        home: 'Ir para bjj-us.com',
         errNotFound: 'Não encontramos o termo desta academia. Peça à sua academia o link do termo.',
         errNetwork: 'Não foi possível conectar ao servidor. Verifique sua conexão e tente de novo.',
         errBusy: 'Muitas tentativas. Aguarde um minuto e tente de novo.',
@@ -264,15 +267,17 @@
         document.documentElement.style.setProperty('--accent', lum > 0.85 ? '#141417' : hex);
         document.documentElement.style.setProperty('--on-accent', lum > 0.6 && lum <= 0.85 ? '#141417' : '#fff');
       }
+      // The header starts with the BJJ-US logo: swap in the gym's logo,
+      // or its initial when it has none.
       const mark = $('mark');
       if (gym.logo_url && /^https:\/\//.test(gym.logo_url)) {
-        const img = document.createElement('img');
-        img.className = 'logo';
-        img.alt = '';
-        img.src = gym.logo_url;
-        mark.replaceWith(img);
+        mark.src = gym.logo_url;
       } else {
-        mark.textContent = gym.name.trim().charAt(0).toUpperCase();
+        const initial = document.createElement('span');
+        initial.className = 'initial';
+        initial.setAttribute('aria-hidden', 'true');
+        initial.textContent = gym.name.trim().charAt(0).toUpperCase();
+        mark.replaceWith(initial);
       }
     }
 
