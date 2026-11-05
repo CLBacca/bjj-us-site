@@ -44,10 +44,12 @@
     label.field { display: block; margin-bottom: 14px; }
     label.field > span { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
     .req { color: var(--error); }
-    input[type=text], input[type=email], input[type=tel], input[type=date] {
+    input[type=text], input[type=email], input[type=tel], input[type=date], select {
       width: 100%; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 10px;
       font: 16px var(--body); color: var(--ink); background: #fff; }
-    input:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
+    .q { display: block; font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+    .inline { display: flex; gap: 24px; margin-bottom: 8px; }
+    input:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
     .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     @media (max-width: 520px) { .row { grid-template-columns: 1fr; gap: 0; } }
     .choice { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; cursor: pointer; }
@@ -119,6 +121,31 @@
           <h2 data-t="participants">Participants under 18</h2>
           <div id="kids"></div>
           <button type="button" class="link" id="add-kid" data-t="addKid">+ Add another child</button>
+        </div>
+
+        <!-- Intake: the answers go to the gym's lead (source and notes). -->
+        <div class="card">
+          <h2 data-t="about">A little about you</h2>
+          <label class="field"><span><span data-t="found">How did you find us?</span> <span class="req">*</span></span>
+            <select id="found" required>
+              <option value="" data-t="choose">Choose one</option>
+              <option value="GOOGLE" data-t="fGoogle">Google search</option>
+              <option value="INSTAGRAM" data-t="fInstagram">Instagram</option>
+              <option value="FACEBOOK" data-t="fFacebook">Facebook</option>
+              <option value="REFERRAL" data-t="fReferral">A friend or family member</option>
+              <option value="WALK_IN" data-t="fWalkIn">Walked or drove by</option>
+              <option value="WEBSITE" data-t="fWebsite">The gym's website</option>
+              <option value="EVENT" data-t="fEvent">An event or seminar</option>
+              <option value="OTHER" data-t="fOther">Other</option>
+            </select>
+          </label>
+          <label class="field" id="found-note-wrap" hidden><span id="found-note-label"></span><input type="text" id="found-note" maxlength="120"></label>
+          <span class="q"><span id="exp-q"></span> <span class="req">*</span></span>
+          <div class="inline">
+            <label class="choice"><input type="radio" name="exp" value="yes"><span data-t="yes">Yes</span></label>
+            <label class="choice"><input type="radio" name="exp" value="no"><span data-t="no">No</span></label>
+          </div>
+          <label class="field" id="exp-note-wrap" hidden><span data-t="expNote">Which, and for how long? (optional)</span><input type="text" id="exp-note" maxlength="200"></label>
         </div>
 
         <p class="error" id="error1" hidden></p>
@@ -193,6 +220,13 @@
         errFields: 'Please fill in the highlighted fields.', errKid: 'Add each child’s name and date of birth.',
         errHealth: 'Please confirm the health declaration.', errEsign: 'Please agree to sign electronically.',
         errTyped: 'Please type your full name.', errSig: 'Please sign in the box.',
+        about: 'A little about you', found: 'How did you find us?', choose: 'Choose one',
+        fGoogle: 'Google search', fInstagram: 'Instagram', fFacebook: 'Facebook', fReferral: 'A friend or family member',
+        fWalkIn: 'Walked or drove by', fWebsite: 'The gym’s website', fEvent: 'An event or seminar', fOther: 'Other',
+        noteReferral: 'Who referred you? (optional)', noteOther: 'Where did you hear about us? (optional)',
+        expSelf: 'Do you have experience in martial arts?', expKid: 'Do they have experience in martial arts?',
+        yes: 'Yes', no: 'No', expNote: 'Which, and for how long? (optional)',
+        errFound: 'Please tell us how you found us.', errExp: 'Please answer the martial arts experience question.',
         errNoGym: 'This link is missing the gym. Ask your gym for its waiver link.',
         home: 'Go to bjj-us.com',
         errNotFound: 'We couldn’t find this gym’s waiver. Ask your gym for its waiver link.',
@@ -217,6 +251,13 @@
         errFields: 'Preencha os campos destacados.', errKid: 'Informe o nome e a data de nascimento de cada criança.',
         errHealth: 'Confirme a declaração de saúde.', errEsign: 'Concorde em assinar eletronicamente.',
         errTyped: 'Digite seu nome completo.', errSig: 'Assine no quadro.',
+        about: 'Um pouco sobre você', found: 'Como você nos conheceu?', choose: 'Escolha uma opção',
+        fGoogle: 'Pesquisa no Google', fInstagram: 'Instagram', fFacebook: 'Facebook', fReferral: 'Um amigo ou familiar',
+        fWalkIn: 'Passei em frente', fWebsite: 'O site da academia', fEvent: 'Um evento ou seminário', fOther: 'Outro',
+        noteReferral: 'Quem indicou você? (opcional)', noteOther: 'Onde você ouviu falar de nós? (opcional)',
+        expSelf: 'Você tem experiência em artes marciais?', expKid: 'A criança tem experiência em artes marciais?',
+        yes: 'Sim', no: 'Não', expNote: 'Qual, e por quanto tempo? (opcional)',
+        errFound: 'Conte como você nos conheceu.', errExp: 'Responda a pergunta sobre experiência em artes marciais.',
         errNoGym: 'Este link está sem a academia. Peça à sua academia o link do termo.',
         home: 'Ir para bjj-us.com',
         errNotFound: 'Não encontramos o termo desta academia. Peça à sua academia o link do termo.',
@@ -294,8 +335,21 @@
       $('kids-card').hidden = !minor;
       $('contact-title').textContent = t(minor ? 'contactGuardian' : 'contactSelf');
       $('health-text').textContent = t(minor ? 'healthKid' : 'healthSelf');
+      $('exp-q').textContent = t(minor ? 'expKid' : 'expSelf');
+      syncIntake();
     }
     document.querySelectorAll('input[name=for]').forEach((el) => el.addEventListener('change', syncFor));
+
+    // The follow-up fields appear only for the answers that need them.
+    const experience = () => (document.querySelector('input[name=exp]:checked') || {}).value;
+    function syncIntake() {
+      const found = $('found').value;
+      $('found-note-wrap').hidden = found !== 'REFERRAL' && found !== 'OTHER';
+      $('found-note-label').textContent = t(found === 'REFERRAL' ? 'noteReferral' : 'noteOther');
+      $('exp-note-wrap').hidden = experience() !== 'yes';
+    }
+    $('found').addEventListener('change', syncIntake);
+    document.querySelectorAll('input[name=exp]').forEach((el) => el.addEventListener('change', syncIntake));
 
     function renderKids() {
       const box = $('kids');
@@ -359,6 +413,8 @@
         showError('error1', t('errKid'));
         return;
       }
+      if (!$('found').value) { showError('error1', t('errFound')); $('found').focus(); return; }
+      if (!experience()) { showError('error1', t('errExp')); return; }
       if (!$('typed').value) $('typed').value = `${$('first').value.trim()} ${$('last').value.trim()}`;
       step(2);
     });
@@ -461,6 +517,10 @@
         email: $('email').value.trim(),
         phone: $('phone').value.trim() || undefined,
         participants: minor ? kids.map((k) => ({ first_name: k.first.trim(), last_name: k.last.trim(), date_of_birth: k.dob })) : [],
+        found_via: $('found').value,
+        found_via_note: $('found-note-wrap').hidden ? undefined : $('found-note').value.trim() || undefined,
+        experience: experience() === 'yes',
+        experience_note: experience() === 'yes' ? $('exp-note').value.trim() || undefined : undefined,
         typed_name: $('typed').value.trim(),
         esign_consent: true,
         health_declared: true,
