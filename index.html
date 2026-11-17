@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BJJ-US — The app for your jiu-jitsu gym</title>
-  <meta name="description" content="Check-ins with confirmed attendance, the class schedule, belt progress, promotions and waivers in one app, branded with your gym's name, logo and colors.">
+  <title>BJJ Gym App and Jiu-Jitsu Gym Software | BJJ-US</title>
+  <meta name="description" content="The app for BJJ gyms: confirmed check-ins, the class schedule, belt and stripe tracking, promotions and waivers, branded with your gym's name, logo and colors.">
   <link rel="canonical" href="https://bjj-us.com/">
 
   <meta property="og:type" content="website">
@@ -29,6 +29,17 @@
 [
   {
     "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://bjj-us.com/#website",
+    "name": "BJJ-US",
+    "alternateName": "BJJ US",
+    "url": "https://bjj-us.com/",
+    "publisher": {
+      "@id": "https://bjj-us.com/#org"
+    }
+  },
+  {
+    "@context": "https://schema.org",
     "@type": "Organization",
     "@id": "https://bjj-us.com/#org",
     "name": "BJJ-US",
@@ -39,17 +50,42 @@
       "@type": "ContactPoint",
       "contactType": "customer support",
       "email": "support@bjj-us.com"
-    }
+    },
+    "description": "BJJ-US makes the app Brazilian jiu-jitsu gyms use for check-ins, the class schedule, belt progress, promotions and waivers."
   },
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
+    "@id": "https://bjj-us.com/#app",
     "name": "BJJ-US",
     "url": "https://bjj-us.com/",
     "applicationCategory": "BusinessApplication",
     "applicationSubCategory": "Jiu-jitsu gym management",
     "operatingSystem": "iOS",
     "description": "An app for Brazilian jiu-jitsu gyms: confirmed check-ins, the class schedule, belt and stripe tracking, promotions, waivers and family accounts, branded with each gym's name, logo and colors.",
+    "featureList": [
+      "Confirmed check-ins and attendance",
+      "Arrival check-in that keeps members' locations on their phones",
+      "Class schedule",
+      "Adult and kids belt and stripe tracking",
+      "Promotion guidelines and promotions due",
+      "Online and in-app waivers, with parents signing for kids",
+      "Family accounts for parents and kids",
+      "Lesson library and weekly focus",
+      "Events and seminars",
+      "Attendance and membership reports",
+      "Branding with each gym's name, logo and colors",
+      "Apple Health workouts",
+      "English and Portuguese"
+    ],
+    "inLanguage": [
+      "en",
+      "pt"
+    ],
+    "audience": {
+      "@type": "BusinessAudience",
+      "audienceType": "Brazilian jiu-jitsu gyms and academies"
+    },
     "publisher": {
       "@id": "https://bjj-us.com/#org"
     }
@@ -103,7 +139,7 @@
         "name": "How does BJJ-US track belts and promotions?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "BJJ-US follows the adult and kids belt systems by age, with stripes. It counts each student's time at their belt and training days since their last promotion, and shows who meets your gym's promotion guide. The professor always decides."
+          "text": "BJJ-US follows the adult and kids belt systems by age, with stripes. It counts each student's time at their belt and training days since their last promotion, and shows who meets your gym's promotion guidelines. The professor always decides."
         }
       },
       {
@@ -153,6 +189,14 @@
           "@type": "Answer",
           "text": "Yes. Each gym's members, attendance and payments are kept separate from every other gym's, and members' locations never leave their phones."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "What languages does BJJ-US support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The app is in English and Portuguese. Each member picks their language, and notifications follow their choice."
+        }
       }
     ]
   }
@@ -180,8 +224,7 @@
     <div class="hero">
       <div class="wrap">
         <div>
-          <p class="eyebrow">For jiu-jitsu gyms</p>
-          <h1>Your gym.<br>Your colors.<br><em>One app.</em></h1>
+          <h1><span class="eyebrow">The BJJ gym app</span>Your gym.<br>Your colors.<br><em>One app.</em></h1>
           <p class="lede">Check-ins, the class schedule, belt progress and promotions, all in an app your members open with your gym's name and logo.</p>
           <p class="best-for">Best for jiu-jitsu academies that want their own branded member app and attendance they can trust.</p>
           <div class="actions">
@@ -236,6 +279,7 @@
             </ul>
           </div>
         </div>
+        <p class="more"><a href="branded-gym-app/">How your branded app works →</a></p>
       </div>
     </section>
 
@@ -261,6 +305,7 @@
           </div>
         </div>
         <p class="footnote">Optional on iPhone: each confirmed class is saved to Apple Health as a Martial Arts workout, with estimated calories.</p>
+        <p class="more"><a href="bjj-attendance-app/">More about attendance →</a></p>
       </div>
     </section>
 
@@ -269,17 +314,19 @@
         <div>
           <p class="eyebrow">Promotions due</p>
           <h2>Know who's ready for the next belt</h2>
-          <p>BJJ-US counts each student's time at their belt and training days since their last promotion, and shows who meets your guide. The professor always decides.</p>
+          <p>BJJ-US counts each student's time at their belt and training days since their last promotion, and shows who meets your gym's guidelines. The professor always decides.</p>
+          <p class="more"><a href="bjj-belt-tracking/">Belt and stripe tracking →</a></p>
         </div>
         <div class="belt-table">
           <table>
             <tr><th>Promotion</th><th>Min. time</th><th>Training days</th></tr>
-            <tr><td>White → Blue</td><td>12 months</td><td>50</td></tr>
-            <tr><td>Blue → Purple</td><td>24 months</td><td>100</td></tr>
-            <tr><td>Purple → Brown</td><td>18 months</td><td>75</td></tr>
-            <tr><td>Brown → Black</td><td>12 months</td><td>50</td></tr>
-            <tr><td>Each kids belt</td><td>8 months</td><td>40</td></tr>
+            <tr><td>White → Blue</td><td>12 months</td><td>125</td></tr>
+            <tr><td>Blue → Purple</td><td>24 months</td><td>150</td></tr>
+            <tr><td>Purple → Brown</td><td>18 months</td><td>150</td></tr>
+            <tr><td>Brown → Black</td><td>12 months</td><td>125</td></tr>
+            <tr><td>Each kids belt</td><td>8 months</td><td>60</td></tr>
           </table>
+          <p class="caption">Recommended guidelines. Your gym can change them.</p>
         </div>
       </div>
     </section>
@@ -309,6 +356,7 @@
             <p>Waiver signatures lists only who still has to sign, with each child's parent.</p>
           </div>
         </div>
+        <p class="more"><a href="bjj-gym-waivers/">More about waivers →</a></p>
       </div>
     </section>
 
@@ -358,7 +406,7 @@
           </details>
           <details>
             <summary>How does BJJ-US track belts and promotions?</summary>
-            <p>BJJ-US follows the adult and kids belt systems by age, with stripes. It counts each student's time at their belt and training days since their last promotion, and shows who meets your gym's promotion guide. The professor always decides.</p>
+            <p>BJJ-US follows the adult and kids belt systems by age, with stripes. It counts each student's time at their belt and training days since their last promotion, and shows who meets your gym's promotion guidelines. The professor always decides.</p>
           </details>
           <details>
             <summary>Can parents manage their kids' accounts?</summary>
@@ -384,6 +432,10 @@
             <summary>Is my gym's data private?</summary>
             <p>Yes. Each gym's members, attendance and payments are kept separate from every other gym's, and members' locations never leave their phones.</p>
           </details>
+          <details>
+            <summary>What languages does BJJ-US support?</summary>
+            <p>The app is in English and Portuguese. Each member picks their language, and notifications follow their choice.</p>
+          </details>
         </div>
       </div>
     </section>
@@ -400,7 +452,14 @@
   <footer class="site-footer">
     <div class="wrap">
       <span>© 2026 BJJ-US</span>
-      <nav>
+      <nav aria-label="Features">
+        <a href="bjj-attendance-app/">Attendance</a>
+        <a href="bjj-belt-tracking/">Belt tracking</a>
+        <a href="bjj-gym-waivers/">Waivers</a>
+        <a href="branded-gym-app/">Branded app</a>
+        <a href="families/">Families</a>
+      </nav>
+      <nav aria-label="Help and legal">
         <a href="privacy/">Privacy</a>
         <a href="terms/">Terms</a>
         <a href="support/">Support</a>

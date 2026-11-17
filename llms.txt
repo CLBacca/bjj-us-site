@@ -1,0 +1,25 @@
+# BJJ-US
+
+> BJJ-US is an app for running a Brazilian jiu-jitsu (BJJ) gym. Members check in to class, see the schedule and track their belt and stripes. Professors confirm attendance and award promotions. Owners manage memberships, waivers and reports. Every gym sees the app with its own name, logo and colors.
+
+Best for jiu-jitsu academies that want their own branded member app and attendance they can trust. It's built for BJJ only: adult and kids belt systems, stripes, promotions and family accounts work the way a jiu-jitsu gym runs.
+
+- Price: free for gyms during our trial period. Members always download the app for free.
+- Platforms: the BJJ-US app on iPhone, and an admin website for owners and professors at admin.bjj-us.com.
+- Languages: the app is in English and Portuguese.
+- Contact: support@bjj-us.com. Gyms can go live the same day.
+
+## Features
+
+- [Attendance](https://bjj-us.com/bjj-attendance-app/): every check-in is confirmed by the member's phone, the member, or the professor after class. Members' locations never leave their phones.
+- [Belt and stripe tracking](https://bjj-us.com/bjj-belt-tracking/): adult and kids belt systems by age, training days and time at belt, promotion guidelines each gym sets, and a list of who's ready. The professor always decides.
+- [Waivers](https://bjj-us.com/bjj-gym-waivers/): a waiver template, signatures in the app and online for trial students, and parents signing for kids.
+- [Branded app](https://bjj-us.com/branded-gym-app/): members join with the gym's invite code and see its name, logo and colors.
+- [Kids and families](https://bjj-us.com/families/): parents manage children under 16 from one login.
+
+## More
+
+- [Home and FAQ](https://bjj-us.com/): an overview and answers to the questions gym owners ask.
+- [Support](https://bjj-us.com/support/): help for members and gym staff.
+- [App Privacy Notice](https://bjj-us.com/privacy/app/)
+- [Terms of Use](https://bjj-us.com/terms/)
