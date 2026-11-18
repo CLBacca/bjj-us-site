@@ -157,7 +157,7 @@ export function CapabilitiesBento() {
           <div className="max-w-3xl">
             <h3 className="text-xl font-bold text-white sm:text-2xl">05. Your Gym&rsquo;s Own App</h3>
             <p className="mt-3 text-sm leading-relaxed text-zinc-300">
-              Members download BJJ-US and join with your gym&rsquo;s invite code; from then on the app shows your gym&rsquo;s name, logo and colors. Change them anytime and every member sees the new look, with no app update.
+              Members download BJJ-US and join with your gym&rsquo;s invite code; from then on the app shows your gym&rsquo;s name, logo and colors. Change them anytime and every member sees the new look, with no app update. Members use the app in English or Portuguese, and more languages are coming, including Spanish, Italian and French.
             </p>
           </div>
           <MoreLink href="/branded-gym-app/">How your branded app works</MoreLink>

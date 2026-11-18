@@ -81,6 +81,6 @@ export const FAQ: FaqItem[] = [
   {
     question: "What languages does BJJ-US support?",
     answer:
-      "The app is in English and Portuguese. Each member picks their language, and notifications follow their choice.",
+      "The app is in English and Portuguese, and more languages are coming, including Spanish, Italian and French. Each member picks their language, and notifications follow their choice.",
   },
 ]
