@@ -50,12 +50,27 @@ export const viewport: Viewport = {
   themeColor: '#0E0E11',
 };
 
+// The app's sign-up email (Supabase) sends members back to bjj-us.com once
+// they confirm, with their login after the # (#access_token=…) or an error
+// (#error_code=…). Send them to /confirmed/, which says what to do next.
+// location.replace drops the address with the login from the history; the
+// login itself is never passed on.
+const AUTH_RETURN = `(function () {
+  var h = location.hash;
+  if (!/(^|[#&])(access_token|error_code)=/.test(h)) return;
+  var status = /(^|[#&])access_token=/.test(h) ? '' : /error_code=otp_expired/.test(h) ? '?status=expired' : '?status=failed';
+  location.replace('/confirmed/' + status);
+})();`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
       className={`dark ${oswald.variable} ${publicSans.variable} ${jetbrainsMono.variable}`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: AUTH_RETURN }} />
+      </head>
       <body
         suppressHydrationWarning
         className="min-h-screen bg-[#0E0E11] text-zinc-100 antialiased selection:bg-[#E63946]/30 selection:text-white"

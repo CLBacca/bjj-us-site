@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Email confirmed — BJJ-US</title>
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Your BJJ-US account is confirmed. Go back to the app and sign in to finish joining your gym.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#0E0E11">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script>
+    // The confirmation link (Supabase) can land here or on the home page with
+    // the member's login after the # (#access_token=…). Drop it from the
+    // address bar and the history before anything else; this page never uses it.
+    (function () {
+      var hash = location.hash;
+      if (!hash) return;
+      var status = /(^|[#&])error_code=otp_expired/.test(hash) ? 'expired'
+        : /(^|[#&])error(_code)?=/.test(hash) ? 'failed' : 'ok';
+      history.replaceState(null, '', location.pathname + (status === 'ok' ? '' : '?status=' + status));
+    })();
+  </script>
+  <style>
+    .confirm .wrap { max-width: 640px; }
+    .confirm .head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .confirm .mark { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; margin-bottom: 18px;
+                     background: #173A24; color: #4ADE80; font: 700 34px/1 var(--display); }
+    .confirm .mark.bad { background: #3A161A; color: #FF8A93; }
+    .confirm ol { padding-left: 22px; margin: 24px 0; }
+    .confirm ol li { color: var(--soft); }
+    .confirm ol li + li { margin-top: 12px; }
+    .confirm .lang { border: 1px solid var(--border); background: none; border-radius: 8px; padding: 6px 10px;
+                     font: 600 13px var(--body); color: var(--muted); cursor: pointer; }
+    .confirm .help { color: var(--muted); font-size: 15px; margin-top: 28px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="../" aria-label="BJJ-US home">
+        <img src="../assets/logo.svg" alt="" width="34" height="34">
+        BJJ-US
+      </a>
+    </div>
+  </header>
+
+  <main class="doc confirm">
+    <div class="wrap">
+      <div class="head">
+        <div class="mark" id="mark" aria-hidden="true">✓</div>
+        <button class="lang" id="lang" type="button" aria-label="Português / English">PT</button>
+      </div>
+      <h1 id="title">Email confirmed</h1>
+      <p class="lead" id="lead">Your account is ready. Now go back to the BJJ-US app to finish joining your gym.</p>
+      <ol id="steps">
+        <li>Open the <strong>BJJ-US</strong> app on your phone.</li>
+        <li>Tap <strong>Sign in</strong> and use the email and password you just created.</li>
+        <li>If the app asks, enter your gym’s invite code and your details to finish joining. Your gym’s name and logo appear once you’re in.</li>
+      </ol>
+      <p class="note" id="note">Opened this email on a computer? That’s fine: sign in on your phone. You can close this page.</p>
+      <p class="help" id="help">Stuck? Email <a href="mailto:support@bjj-us.com">support@bjj-us.com</a>.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 BJJ-US</span>
+      <nav aria-label="Help and legal">
+        <a href="../privacy/">Privacy</a>
+        <a href="../terms/">Terms</a>
+        <a href="../support/">Support</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var SUPPORT = '<a href="mailto:support@bjj-us.com">support@bjj-us.com</a>';
+      var T = {
+        en: {
+          ok: {
+            title: 'Email confirmed',
+            lead: 'Your account is ready. Now go back to the BJJ-US app to finish joining your gym.',
+            steps: [
+              'Open the <strong>BJJ-US</strong> app on your phone.',
+              'Tap <strong>Sign in</strong> and use the email and password you just created.',
+              'If the app asks, enter your gym’s invite code and your details to finish joining. Your gym’s name and logo appear once you’re in.'
+            ],
+            note: 'Opened this email on a computer? That’s fine: sign in on your phone. You can close this page.'
+          },
+          expired: {
+            title: 'This link has expired',
+            lead: 'Confirmation links work once and expire after a while. Some email apps open links to check them, which can use them up.'
+          },
+          failed: {
+            title: 'We couldn’t confirm your email',
+            lead: 'Something went wrong with this confirmation link.'
+          },
+          retry: [
+            'Open the <strong>BJJ-US</strong> app and tap <strong>Sign in</strong> with your email and password.',
+            'If it signs you in, your email is already confirmed: finish joining your gym.',
+            'If it says your email isn’t confirmed, email ' + SUPPORT + ' and we’ll send you a new link.'
+          ],
+          retryNote: 'Your account and password are safe: nothing changes until you sign in.',
+          help: 'Stuck? Email ' + SUPPORT + '.'
+        },
+        pt: {
+          ok: {
+            title: 'E-mail confirmado',
+            lead: 'Sua conta está pronta. Agora volte ao app BJJ-US para concluir a entrada na sua academia.',
+            steps: [
+              'Abra o app <strong>BJJ-US</strong> no seu celular.',
+              'Toque em <strong>Entrar</strong> e use o e-mail e a senha que você acabou de criar.',
+              'Se o app pedir, digite o código de convite da sua academia e seus dados para concluir a entrada. O nome e o logo da academia aparecem assim que você entrar.'
+            ],
+            note: 'Abriu este e-mail no computador? Tudo bem: entre pelo celular. Você pode fechar esta página.'
+          },
+          expired: {
+            title: 'Este link expirou',
+            lead: 'Os links de confirmação funcionam uma vez e expiram depois de um tempo. Alguns apps de e-mail abrem os links para verificá-los, e isso pode usá-los.'
+          },
+          failed: {
+            title: 'Não conseguimos confirmar seu e-mail',
+            lead: 'Algo deu errado com este link de confirmação.'
+          },
+          retry: [
+            'Abra o app <strong>BJJ-US</strong> e toque em <strong>Entrar</strong> com seu e-mail e senha.',
+            'Se entrar, seu e-mail já está confirmado: conclua a entrada na sua academia.',
+            'Se aparecer que o e-mail não foi confirmado, escreva para ' + SUPPORT + ' e enviaremos um novo link.'
+          ],
+          retryNote: 'Sua conta e sua senha estão seguras: nada muda até você entrar.',
+          help: 'Precisa de ajuda? Escreva para ' + SUPPORT + '.'
+        }
+      };
+
+      var match = /[?&]status=(expired|failed)/.exec(location.search);
+      var status = match ? match[1] : 'ok';
+      var lang = (navigator.language || '').toLowerCase().indexOf('pt') === 0 ? 'pt' : 'en';
+      try { lang = localStorage.getItem('confirmed.lang') || lang; } catch (e) { /* private mode */ }
+
+      function $(id) { return document.getElementById(id); }
+
+      function render() {
+        var L = T[lang];
+        var page = L[status];
+        var steps = status === 'ok' ? page.steps : L.retry;
+        document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+        document.title = page.title + ' — BJJ-US';
+        $('mark').textContent = status === 'ok' ? '✓' : '!';
+        $('mark').className = status === 'ok' ? 'mark' : 'mark bad';
+        $('title').textContent = page.title;
+        $('lead').textContent = page.lead;
+        $('steps').innerHTML = steps.map(function (s) { return '<li>' + s + '</li>'; }).join('');
+        $('note').textContent = status === 'ok' ? page.note : L.retryNote;
+        $('help').innerHTML = L.help;
+        $('lang').textContent = lang === 'pt' ? 'EN' : 'PT';
+      }
+
+      $('lang').addEventListener('click', function () {
+        lang = lang === 'pt' ? 'en' : 'pt';
+        try { localStorage.setItem('confirmed.lang', lang); } catch (e) { /* private mode */ }
+        render();
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>

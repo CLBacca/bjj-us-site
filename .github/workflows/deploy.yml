@@ -41,6 +41,7 @@ jobs:
                    support/index.html families/index.html waiver/index.html \
                    bjj-attendance-app/index.html bjj-belt-tracking/index.html \
                    bjj-gym-waivers/index.html branded-gym-app/index.html \
+                   confirmed/index.html \
                    assets/site.css assets/logo.png; do
             test -s "out/$f" || { echo "Missing out/$f"; exit 1; }
           done
