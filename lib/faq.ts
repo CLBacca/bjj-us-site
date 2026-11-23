@@ -1,21 +1,15 @@
 // Home page FAQ. The visible FAQ and the FAQPage structured data are both
 // rendered from this list, so they can't drift apart.
-import { INCLUDED_STUDENTS, TIERS, TRIAL_DAYS, formatCents, formatDollars } from "@/lib/pricing"
+import { TRIAL_DAYS } from "@/lib/trial"
 
 export interface FaqItem {
   question: string
   answer: string
 }
 
-const [openMat, blackBelt, affiliation] = TIERS
-
+// No prices on the site: gyms ask support for pricing.
 const priceAnswer =
-  `Every gym starts with a ${TRIAL_DAYS}-day free trial. After that, the first ${INCLUDED_STUDENTS} students are included in every tier: ` +
-  `${openMat.name} is ${formatDollars(openMat.baseCents)} a month for 1–60 students, ` +
-  `${blackBelt.name} is ${formatDollars(blackBelt.baseCents)} a month for 61–140, ` +
-  `and ${affiliation.name} is ${formatDollars(affiliation.baseCents)} a month for 141 or more. ` +
-  `Each student after ${INCLUDED_STUDENTS} adds ${formatCents(openMat.perStudentCents)}, ` +
-  `${formatCents(blackBelt.perStudentCents)} or ${formatCents(affiliation.perStudentCents)} a month, by tier. ` +
+  `Every gym starts with a ${TRIAL_DAYS}-day free trial. For pricing, email support@bjj-us.com with your number of active students. ` +
   "Members always download the app for free."
 
 export const FAQ: FaqItem[] = [

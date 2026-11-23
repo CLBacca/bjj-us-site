@@ -32,7 +32,6 @@ export function Navbar() {
           {[
             { href: "/#features", label: "Features" },
             { href: "/#mat-sandbox", label: "Demo" },
-            { href: "/#pricing", label: "Pricing" },
             { href: "/#faq", label: "FAQ" },
             { href: "/support/", label: "Support" },
           ].map(({ href, label }) => (

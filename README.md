@@ -21,8 +21,8 @@ npm run build    # static export to out/
 npx serve out    # preview the export exactly as Pages serves it
 ```
 
-The home page's prices live in `lib/pricing.ts`, and its FAQ in `lib/faq.ts`.
-The visible FAQ and the FAQPage structured data are both built from that list.
+The home page's FAQ lives in `lib/faq.ts`; the visible FAQ and the FAQPage
+structured data are both built from that list. The trial length is in `lib/trial.ts`.
 
 | Path | Page |
 | --- | --- |
@@ -52,7 +52,7 @@ the same commit as any app change that collects new data — all three privacy p
 
 - `public/robots.txt`, `public/sitemap.xml` and `public/llms.txt` (a plain summary for AI crawlers) are served at the root. Add every new public page to the sitemap and to `llms.txt`, and link it from the footer (`components/footer.tsx` and the static pages' footers).
 - FAQ structured data: on the home page it's built from `lib/faq.ts`. On the support page and the four feature pages, the `application/ld+json` in the head repeats each page's FAQ word for word: change both together.
-- Prices appear on the home page, in its FAQ and in `llms.txt`, all taken from `lib/pricing.ts` or matching it. Don't add prices anywhere else (other pages, the SoftwareApplication structured data, store listings) without the owner's OK.
+- The site shows no prices (removed 2026-11-22): gyms email support@bjj-us.com for pricing. Don't add prices anywhere (pages, `llms.txt`, the structured data, store listings) without the owner's OK.
 - Pages that shouldn't be in search carry `<meta name="robots" content="noindex">`: `/waiver/`, `/privacy/connection-bjj/`, `/privacy/gym-template/`.
 - IndexNow: the key file is `public/b1f9426e5ac69dc2d83389e464500bfd.txt`. After a deploy changes pages, tell Bing and the other IndexNow engines:
 
