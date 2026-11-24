@@ -10,6 +10,7 @@ const FEATURE_LINKS = [
   { href: "/bjj-gym-waivers/", label: "Waivers" },
   { href: "/branded-gym-app/", label: "Branded app" },
   { href: "/families/", label: "Families" },
+  { href: "/compare/", label: "Compare" },
 ]
 
 const HELP_LINKS = [
