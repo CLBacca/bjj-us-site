@@ -69,6 +69,19 @@ export function TrialSignup() {
             <p className="mt-4 text-sm leading-relaxed text-zinc-300">
               Send us your gym&rsquo;s name, logo, brand color and the owner&rsquo;s email. We create your gym the same day, the owner adds the schedule and plans, and members join with their invite codes. A member list is optional; we can invite everyone in bulk.
             </p>
+
+            {/* A real BJJ-US gym, named with its owner's OK (2026-11-24). */}
+            <div className="mt-6 rounded-xl border border-white/10 bg-[#0E0E11] p-4">
+              <p className="text-xs font-medium uppercase tracking-wide text-zinc-500">
+                Already on BJJ-US
+              </p>
+              <p className="mt-1.5 text-sm font-semibold text-white">
+                Connection BJJ Academy
+              </p>
+              <p className="mt-0.5 text-xs text-zinc-400">
+                Apex, North Carolina &middot; Gabriel Sousa, Head Coach and Owner
+              </p>
+            </div>
           </div>
 
           <div className="mt-8 space-y-2 border-t border-white/10 pt-6 text-xs text-zinc-400">
