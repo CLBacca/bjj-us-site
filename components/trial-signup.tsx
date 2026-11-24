@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, CheckCircle2 } from "lucide-react"
+import { APP_STORE_URL } from "@/lib/app-store"
 import { TRIAL_DAYS } from "@/lib/trial"
 
 const SUPPORT_EMAIL = "support@bjj-us.com"
@@ -71,7 +72,16 @@ export function TrialSignup() {
           </div>
 
           <div className="mt-8 space-y-2 border-t border-white/10 pt-6 text-xs text-zinc-400">
-            <div>Members always download the app for free.</div>
+            <div>
+              Members always{" "}
+              <a
+                href={APP_STORE_URL}
+                className="text-zinc-200 underline-offset-4 hover:underline"
+              >
+                download the app
+              </a>{" "}
+              for free.
+            </div>
             <div>
               Pricing or questions?{" "}
               <a

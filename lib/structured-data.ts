@@ -1,5 +1,6 @@
 // JSON-LD for the home page, carried over from the static index.html.
-// The static feature pages point at the same @ids (#website, #org, #app).
+// Keep the @ids (#website, #org, #app) stable: they name these entities.
+import { APP_STORE_URL } from "@/lib/app-store"
 import { FAQ } from "@/lib/faq"
 
 const SITE = "https://bjj-us.com/"
@@ -28,7 +29,9 @@ export const homeStructuredData = [
       email: "support@bjj-us.com",
     },
     description:
-      "BJJ-US makes the app Brazilian jiu-jitsu gyms use for check-ins, the class schedule, belt progress, promotions and waivers.",
+      "Brazilian Jiu-Jitsu gym management software and branded member mobile app with zero Stripe processing markup.",
+    // Add G2, Capterra and YouTube here once those pages exist.
+    sameAs: [APP_STORE_URL],
   },
   {
     "@context": "https://schema.org",
@@ -37,24 +40,26 @@ export const homeStructuredData = [
     name: "BJJ-US",
     url: SITE,
     applicationCategory: "BusinessApplication",
-    applicationSubCategory: "Jiu-jitsu gym management",
-    operatingSystem: "iOS",
+    applicationSubCategory: "Gym Management Software",
+    operatingSystem: "iOS, Web",
+    downloadUrl: APP_STORE_URL,
+    installUrl: APP_STORE_URL,
     description:
-      "An app for Brazilian jiu-jitsu gyms: confirmed check-ins, the class schedule, belt and stripe tracking, promotions, waivers and family accounts, branded with each gym's name, logo and colors.",
+      "BJJ academy management platform with confirmed mat-side check-ins, native adult and kids IBJJF belt tracking, digital waivers, branded member apps, and 0.0% Stripe billing markup.",
     featureList: [
-      "Confirmed check-ins and attendance",
+      "Confirmed mat-side check-in and attendance",
+      "0.0% platform markup direct Stripe Connect billing",
+      "IBJJF adult and kids belt and stripe tracking",
+      "Branded gym mobile app included",
+      "Digital liability waivers and family accounts",
+      "English and Portuguese member app support",
       "Arrival check-in that keeps members' locations on their phones",
       "Class schedule",
-      "Adult and kids belt and stripe tracking",
       "Promotion guidelines and promotions due",
-      "Online and in-app waivers, with parents signing for kids",
-      "Family accounts for parents and kids",
       "Lesson library and weekly focus",
       "Events and seminars",
       "Attendance and membership reports",
-      "Branding with each gym's name, logo and colors",
       "Apple Health workouts",
-      "English and Portuguese",
     ],
     inLanguage: ["en", "pt"],
     audience: {

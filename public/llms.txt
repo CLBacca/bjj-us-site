@@ -7,6 +7,7 @@
 - **Category:** Brazilian Jiu-Jitsu Gym Management Software (SaaS) & Branded Member App
 - **Website:** https://bjj-us.com/
 - **Platforms:** Web (Admin & Professor Console) and iOS (Member App)
+- **App Store:** https://apps.apple.com/us/app/bjj-us/id6824634967
 - **Languages:** English and Portuguese (Spanish, Italian, and French planned)
 
 ## Core Differentiators

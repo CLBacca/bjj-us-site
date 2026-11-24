@@ -1,5 +1,6 @@
 import Image from "next/image"
 import logo from "@/public/assets/logo.svg"
+import { APP_STORE_URL } from "@/lib/app-store"
 
 // Feature, help and legal pages are static HTML in public/, served at the
 // same URLs as before. The footer links every one of them, like the old site.
@@ -40,6 +41,12 @@ export function Footer() {
             className="mt-4 inline-block text-xs text-zinc-300 underline-offset-4 hover:underline"
           >
             support@bjj-us.com
+          </a>
+          <a
+            href={APP_STORE_URL}
+            className="mt-4 flex w-fit items-center rounded-md border border-white/15 px-3 py-2 text-xs font-medium text-zinc-200 transition-colors hover:border-white/30 hover:text-white"
+          >
+            Download on the App Store
           </a>
           <p className="mt-4 text-xs text-zinc-500">&copy; 2026 BJJ-US</p>
         </div>
