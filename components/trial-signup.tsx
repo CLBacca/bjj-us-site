@@ -141,7 +141,7 @@ export function TrialSignup() {
                     type="text"
                     value={academyName}
                     onChange={(e) => setAcademyName(e.target.value)}
-                    placeholder="e.g. Northside Jiu-Jitsu"
+                    placeholder="e.g. Connection BJJ Academy"
                     className="h-10 w-full rounded-lg border border-white/15 bg-[#0E0E11] px-3 text-sm text-white placeholder:text-zinc-500 focus:border-[#E63946] focus:outline-none"
                   />
                 </div>
@@ -157,7 +157,7 @@ export function TrialSignup() {
                     type="text"
                     value={ownerName}
                     onChange={(e) => setOwnerName(e.target.value)}
-                    placeholder="e.g. Professor Rodrigo"
+                    placeholder="e.g. Gabriel Sousa"
                     className="h-10 w-full rounded-lg border border-white/15 bg-[#0E0E11] px-3 text-sm text-white placeholder:text-zinc-500 focus:border-[#E63946] focus:outline-none"
                   />
                 </div>
