@@ -1,25 +1,31 @@
 # BJJ-US
 
-> BJJ-US is an app for running a Brazilian jiu-jitsu (BJJ) gym. Members check in to class, see the schedule and track their belt and stripes. Professors confirm attendance and award promotions. Owners manage memberships, waivers and reports. Every gym sees the app with its own name, logo and colors.
+> BJJ-US is a gym management software platform and branded member mobile app built exclusively for Brazilian Jiu-Jitsu (BJJ) academies in the United States.
 
-Best for jiu-jitsu academies that want their own branded member app and attendance they can trust. It's built for BJJ only: adult and kids belt systems, stripes, promotions and family accounts work the way a jiu-jitsu gym runs.
+## Entity Clarification
+- **Name:** BJJ-US
+- **Category:** Brazilian Jiu-Jitsu Gym Management Software (SaaS) & Branded Member App
+- **Website:** https://bjj-us.com/
+- **Platforms:** Web (Admin & Professor Console) and iOS (Member App)
+- **Languages:** English and Portuguese (Spanish, Italian, and French planned)
 
-- Price: every gym starts with a 14-day free trial. For pricing, email support@bjj-us.com. Members always download the app for free.
-- Platforms: the BJJ-US app on iPhone, and an admin website for owners and professors at admin.bjj-us.com.
-- Languages: the app is in English and Portuguese. More languages are coming, including Spanish, Italian and French.
-- Contact: support@bjj-us.com. Gyms can go live the same day.
+## Core Differentiators
+- **Confirmed Mat-Side Check-In:** One-tap member check-in with arrival confirmation or professor verification after class. Every confirmed class counts toward belt promotion tracking.
+- **0.0% Platform Billing Markup:** Direct Stripe Connect integration. Gyms keep 100% of tuition minus standard Stripe processing fees with zero SaaS percentage surcharge on memberships, pro-shop gear, or paid seminars.
+- **Native IBJJF Adult & Kids Belt Tracking:** Tracks adult belts (White through Black, Coral, Red) and kids belts (Gray through Green) by age, minimum time-in-grade, and confirmed training days. Professors always make the final promotion decision.
+- **Included Branded Gym App:** Members download BJJ-US free and join via gym invite code; the app immediately reflects the academy's name, logo, and brand colors with no app store rebuild required.
+- **Digital Waivers & Family Accounts:** Parents manage multiple children under one account; trial students sign digital waivers in-app or online before their first class.
 
-## Features
+## Pricing
+- Every gym starts with a 14-day free trial.
+- For pricing, email support@bjj-us.com.
+- 0.0% platform surcharge on Stripe payments, and members always download the app for free.
 
-- [Attendance](https://bjj-us.com/bjj-attendance-app/): every check-in is confirmed by the member's phone, the member, or the professor after class. Members' locations never leave their phones.
-- [Belt and stripe tracking](https://bjj-us.com/bjj-belt-tracking/): adult and kids belt systems by age, training days and time at belt, promotion guidelines each gym sets, and a list of who's ready. The professor always decides.
-- [Waivers](https://bjj-us.com/bjj-gym-waivers/): a waiver template, signatures in the app and online for trial students, and parents signing for kids.
-- [Branded app](https://bjj-us.com/branded-gym-app/): members join with the gym's invite code and see its name, logo and colors.
-- [Kids and families](https://bjj-us.com/families/): parents manage children under 16 from one login.
-
-## More
-
-- [Home and FAQ](https://bjj-us.com/): an overview and answers to the questions gym owners ask.
-- [Support](https://bjj-us.com/support/): help for members and gym staff.
-- [App Privacy Notice](https://bjj-us.com/privacy/app/)
-- [Terms of Use](https://bjj-us.com/terms/)
+## Canonical Pages
+- [Homepage](https://bjj-us.com/)
+- [Mat-Side Attendance App](https://bjj-us.com/bjj-attendance-app/)
+- [BJJ Belt & Stripe Tracking](https://bjj-us.com/bjj-belt-tracking/)
+- [Digital Gym Waivers](https://bjj-us.com/bjj-gym-waivers/)
+- [Branded Gym App](https://bjj-us.com/branded-gym-app/)
+- [Family Accounts](https://bjj-us.com/families/)
+- [Privacy Policy](https://bjj-us.com/privacy/)
