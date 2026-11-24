@@ -6,8 +6,8 @@ const isDev = process.env.NODE_ENV === 'development';
 // `npm run build` writes plain files to out/, and the Pages workflow
 // (.github/workflows/deploy.yml) publishes that folder.
 //
-// public/ holds the pages that are still plain HTML (support, privacy,
-// terms, waiver, families and the feature pages), plus .well-known, CNAME,
+// public/ holds the pages that are still plain HTML (privacy, terms,
+// waiver, confirmed), plus .well-known, CNAME,
 // robots.txt, sitemap.xml and llms.txt. They are copied to out/ as they are,
 // so their URLs don't change. The app and Apple depend on /terms/ and
 // /privacy/app/: never move them.

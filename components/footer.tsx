@@ -2,8 +2,8 @@ import Image from "next/image"
 import logo from "@/public/assets/logo.svg"
 import { APP_STORE_URL } from "@/lib/app-store"
 
-// Feature, help and legal pages are static HTML in public/, served at the
-// same URLs as before. The footer links every one of them, like the old site.
+// Links every public page: the Next content pages (features, families,
+// compare, support) and the static legal pages in public/.
 const FEATURE_LINKS = [
   { href: "/bjj-attendance-app/", label: "Attendance" },
   { href: "/bjj-belt-tracking/", label: "Belt tracking" },

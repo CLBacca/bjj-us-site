@@ -1,9 +1,13 @@
 import type { Metadata } from "next"
-import { ChevronDown } from "lucide-react"
 
-import { Footer } from "@/components/footer"
-import { Navbar } from "@/components/navbar"
-import { toJsonLd } from "@/lib/structured-data"
+import {
+  breadcrumbJsonLd,
+  ContentPage,
+  FaqSection,
+  faqJsonLd,
+  type FaqItem,
+} from "@/components/content-page"
+import { pageMetadata } from "@/lib/page-metadata"
 import { TRIAL_DAYS } from "@/lib/trial"
 
 // BJJ-US compared with general gym software. Names no competitor (the user's
@@ -12,22 +16,15 @@ import { TRIAL_DAYS } from "@/lib/trial"
 // in 2026-11. Keep it fair: no claim a reader could prove false of the
 // category as a whole. No BJJ-US prices.
 
-const URL = "https://bjj-us.com/compare/"
-
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "compare/",
   title: "BJJ-US vs. General Gym Software: Built for Jiu-Jitsu Academies",
   description:
     "How BJJ-US differs from general gym software: belt tracking that follows the IBJJF belt system, confirmed check-ins, a member app with your gym's name and logo, Stripe payments with no markup, and Portuguese.",
-  alternates: { canonical: URL },
-  openGraph: {
-    title: "BJJ-US vs. General Gym Software",
-    description:
-      "Software built only for jiu-jitsu gyms, compared with software for every kind of gym: belts, check-ins, the member app and payments.",
-    url: URL,
-    siteName: "BJJ-US",
-    type: "website",
-  },
-}
+  ogTitle: "BJJ-US vs. General Gym Software",
+  ogDescription:
+    "Software built only for jiu-jitsu gyms, compared with software for every kind of gym: belts, check-ins, the member app and payments.",
+})
 
 const ROWS = [
   {
@@ -64,7 +61,7 @@ const ROWS = [
   },
 ]
 
-const FAQS = [
+const FAQS: FaqItem[] = [
   {
     question: "How is BJJ-US different from general gym software?",
     answer:
@@ -92,55 +89,28 @@ const FAQS = [
   },
 ]
 
-const structuredData = [
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://bjj-us.com/" },
-      { "@type": "ListItem", position: 2, name: "BJJ-US vs. general gym software", item: URL },
-    ],
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: FAQS.map(({ question, answer }) => ({
-      "@type": "Question",
-      name: question,
-      acceptedAnswer: { "@type": "Answer", text: answer },
-    })),
-  },
-]
+const structuredData = [breadcrumbJsonLd("BJJ-US vs. general gym software", "compare/"), faqJsonLd(FAQS)]
 
 const link = "font-medium text-[#E63946] underline-offset-4 hover:underline"
 
 export default function ComparePage() {
   return (
-    <div className="min-h-screen bg-[#0E0E11] text-zinc-100">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: toJsonLd(structuredData) }}
-      />
-      <Navbar />
-      <main className="mx-auto max-w-5xl px-6 pb-24 pt-32">
-        <nav aria-label="Breadcrumb" className="mb-8 text-xs text-zinc-500">
-          <a href="/" className="hover:text-zinc-200">
-            Home
-          </a>
-          <span className="mx-2">/</span>
-          <span className="text-zinc-300">Compare</span>
-        </nav>
-
-        <header className="mb-14 max-w-3xl">
-          <p className="text-sm font-medium text-[#E63946]">Compare</p>
-          <h1 className="font-[family-name:var(--font-display)] mt-3 text-balance text-4xl font-bold uppercase tracking-tight text-white sm:text-5xl">
-            BJJ-US vs. general gym software
-          </h1>
-          <p className="mt-5 text-base leading-relaxed text-zinc-300">
-            Most gym software is built for every kind of gym, from yoga studios to fitness centers. BJJ-US is built only for Brazilian jiu-jitsu academies: belt tracking that follows the IBJJF belt system, confirmed check-ins, a member app with your gym&rsquo;s name and logo, and Stripe payments with 0.0% platform markup.
-          </p>
-        </header>
-
+    <ContentPage
+      wide
+      crumb="Compare"
+      eyebrow="Compare"
+      title="BJJ-US vs. general gym software"
+      intro={
+        <p>
+          Most gym software is built for every kind of gym, from yoga studios to fitness centers. BJJ-US is built only for Brazilian jiu-jitsu academies: belt tracking that follows the IBJJF belt system, confirmed check-ins, a member app with your gym&rsquo;s name and logo, and Stripe payments with 0.0% platform markup.
+        </p>
+      }
+      jsonLd={structuredData}
+      cta={{
+        title: "Try BJJ-US at your gym",
+        text: `Every gym starts with a ${TRIAL_DAYS}-day free trial. We set up your gym the same day and can import your member list.`,
+      }}
+    >
         <section aria-labelledby="comparison" className="mb-16">
           <h2 id="comparison" className="mb-6 text-2xl font-bold tracking-tight text-white">
             Side by side
@@ -251,40 +221,7 @@ export default function ComparePage() {
           </div>
         </section>
 
-        <section aria-labelledby="faq" className="mb-16">
-          <h2 id="faq" className="mb-6 text-2xl font-bold tracking-tight text-white">
-            Questions
-          </h2>
-          <div className="divide-y divide-white/10 rounded-2xl border border-white/10 bg-[#18181B]">
-            {FAQS.map(({ question, answer }) => (
-              <details key={question} className="group px-6 sm:px-7">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-left text-base font-semibold text-white [&::-webkit-details-marker]:hidden">
-                  {question}
-                  <ChevronDown
-                    className="h-4 w-4 shrink-0 text-zinc-400 transition-transform group-open:rotate-180"
-                    aria-hidden="true"
-                  />
-                </summary>
-                <p className="max-w-3xl pb-6 text-sm leading-relaxed text-zinc-300">{answer}</p>
-              </details>
-            ))}
-          </div>
-        </section>
-
-        <section className="rounded-2xl border border-white/10 bg-[#18181B] px-8 py-10 text-center">
-          <h2 className="text-2xl font-bold text-white">Try BJJ-US at your gym</h2>
-          <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-zinc-300">
-            Every gym starts with a {TRIAL_DAYS}-day free trial. We set up your gym the same day and can import your member list.
-          </p>
-          <a
-            href="/#trial-signup"
-            className="mt-6 inline-block rounded-lg bg-[#E63946] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90"
-          >
-            Start your free trial
-          </a>
-        </section>
-      </main>
-      <Footer />
-    </div>
+        <FaqSection items={FAQS} />
+    </ContentPage>
   )
 }

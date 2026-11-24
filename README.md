@@ -2,9 +2,11 @@
 
 The BJJ-US marketing site and the legal pages the app links to.
 
-- **Home page:** a Next.js app (`app/`, `components/`, `lib/`), exported as
-  static files.
-- **Every other page:** plain HTML with one stylesheet
+- **Home, feature, families, support and compare pages:** a Next.js app
+  (`app/`, `components/`, `lib/`), exported as static files. The content
+  pages share `components/content-page.tsx` (navbar, text styles, questions,
+  the "Start Trial" box, footer) and `lib/page-metadata.ts`.
+- **Legal, waiver and confirmed pages:** plain HTML with one stylesheet
   (`public/assets/site.css`), in `public/`. Next copies `public/` into the
   export unchanged, so those URLs never change.
 
@@ -50,7 +52,7 @@ the same commit as any app change that collects new data — all three privacy p
 
 ## Search engines and AI answers
 
-- `public/robots.txt`, `public/sitemap.xml` and `public/llms.txt` (a plain summary for AI crawlers) are served at the root. Add every new public page to the sitemap and to `llms.txt`, and link it from the footer (`components/footer.tsx` and the static pages' footers).
+- `public/robots.txt`, `public/sitemap.xml` and `public/llms.txt` (a plain summary for AI crawlers) are served at the root. Add every new public page to the sitemap and to `llms.txt`, and link it from the footer (`components/footer.tsx` and the static legal pages' footers).
 - FAQ structured data: on the home page it's built from `lib/faq.ts`. On the support page and the four feature pages, the `application/ld+json` in the head repeats each page's FAQ word for word: change both together.
 - The site shows no prices (removed 2026-11-22): gyms email support@bjj-us.com for pricing. Don't add prices anywhere (pages, `llms.txt`, the structured data, store listings) without the owner's OK.
 - Pages that shouldn't be in search carry `<meta name="robots" content="noindex">`: `/waiver/`, `/privacy/connection-bjj/`, `/privacy/gym-template/`.
