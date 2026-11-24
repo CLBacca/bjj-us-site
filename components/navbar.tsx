@@ -3,6 +3,7 @@
 import Image from "next/image"
 import logo from "@/public/assets/logo.svg"
 import { Button } from "@/components/ui/button"
+import { DEMO_URL } from "@/lib/demo"
 
 export function Navbar() {
   // The navbar is also on the 404 page, so links go to "/#…" and the
@@ -45,7 +46,15 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="shrink-0">
+        <div className="flex shrink-0 items-center gap-2">
+          <a
+            href={DEMO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden h-9 items-center rounded-lg border border-white/15 px-4 text-xs font-semibold text-zinc-200 whitespace-nowrap transition-colors hover:border-white/30 hover:text-white sm:inline-flex"
+          >
+            Book a Demo
+          </a>
           <Button
             onClick={scrollToTrial}
             size="sm"

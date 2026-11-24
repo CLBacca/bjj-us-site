@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, CheckCircle2 } from "lucide-react"
 import { APP_STORE_URL } from "@/lib/app-store"
+import { DEMO_URL } from "@/lib/demo"
 import { TRIAL_DAYS } from "@/lib/trial"
 
 const SUPPORT_EMAIL = "support@bjj-us.com"
@@ -69,6 +70,17 @@ export function TrialSignup() {
             <p className="mt-4 text-sm leading-relaxed text-zinc-300">
               Send us your gym&rsquo;s name, logo, brand color and the owner&rsquo;s email. We create your gym the same day, the owner adds the schedule and plans, and members join with their invite codes. A member list is optional; we can invite everyone in bulk.
             </p>
+            <p className="mt-4 text-sm leading-relaxed text-zinc-300">
+              Prefer to see it first? Book a 30-minute demo.
+            </p>
+            <a
+              href={DEMO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex h-10 items-center rounded-lg border border-white/15 px-5 text-sm font-semibold text-zinc-200 transition-colors hover:border-white/30 hover:text-white"
+            >
+              Book a Demo
+            </a>
           </div>
 
           <div className="mt-8 space-y-2 border-t border-white/10 pt-6 text-xs text-zinc-400">

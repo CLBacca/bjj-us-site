@@ -3,6 +3,7 @@ import { ChevronDown } from "lucide-react"
 
 import { Footer } from "@/components/footer"
 import { Navbar } from "@/components/navbar"
+import { DEMO_URL } from "@/lib/demo"
 import { toJsonLd } from "@/lib/structured-data"
 import { TRIAL_DAYS } from "@/lib/trial"
 
@@ -53,7 +54,7 @@ export function FaqList({ items }: { items: FaqItem[] }) {
 }
 
 // The main action on every content page: start the free trial on the home
-// page's form.
+// page's form, or book a demo on Cal.com.
 export function TrialCta({
   title = "Let’s set up your gym",
   text = `Every gym starts with a ${TRIAL_DAYS}-day free trial. Members always download the app for free.`,
@@ -65,12 +66,22 @@ export function TrialCta({
     <section className="mt-16 rounded-2xl border border-white/10 bg-[#18181B] px-8 py-10 text-center">
       <h2 className="text-2xl font-bold text-white">{title}</h2>
       <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-zinc-300">{text}</p>
-      <a
-        href="/#trial-signup"
-        className="mt-6 inline-block rounded-lg bg-[#E63946] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#B42332]"
-      >
-        Start Trial
-      </a>
+      <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+        <a
+          href="/#trial-signup"
+          className="inline-block rounded-lg bg-[#E63946] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#B42332]"
+        >
+          Start Trial
+        </a>
+        <a
+          href={DEMO_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block rounded-lg border border-white/15 px-6 py-3 text-sm font-semibold text-zinc-200 transition-colors hover:border-white/30 hover:text-white"
+        >
+          Book a Demo
+        </a>
+      </div>
     </section>
   )
 }
