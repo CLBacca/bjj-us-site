@@ -45,11 +45,11 @@ export const homeStructuredData = [
     downloadUrl: APP_STORE_URL,
     installUrl: APP_STORE_URL,
     description:
-      "BJJ academy management platform with confirmed mat-side check-ins, native adult and kids IBJJF belt tracking, digital waivers, branded member apps, and 0.0% Stripe billing markup.",
+      "BJJ academy management platform with confirmed mat-side check-ins, adult and kids belt tracking that follows the IBJJF belt system, digital waivers, branded member apps, and 0.0% Stripe billing markup.",
     featureList: [
       "Confirmed mat-side check-in and attendance",
       "0.0% platform markup direct Stripe Connect billing",
-      "IBJJF adult and kids belt and stripe tracking",
+      "Adult and kids belt and stripe tracking that follows the IBJJF belt system",
       "Branded gym mobile app included",
       "Digital liability waivers and family accounts",
       "English and Portuguese member app support",

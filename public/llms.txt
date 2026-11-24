@@ -13,7 +13,7 @@
 ## Core Differentiators
 - **Confirmed Mat-Side Check-In:** One-tap member check-in with arrival confirmation or professor verification after class. Every confirmed class counts toward belt promotion tracking.
 - **0.0% Platform Billing Markup:** Direct Stripe Connect integration. Gyms keep 100% of tuition minus standard Stripe processing fees with zero SaaS percentage surcharge on memberships, pro-shop gear, or paid seminars.
-- **Native IBJJF Adult & Kids Belt Tracking:** Tracks adult belts (White through Black, Coral, Red) and kids belts (Gray through Green) by age, minimum time-in-grade, and confirmed training days. Professors always make the final promotion decision.
+- **Adult & Kids Belt Tracking (follows the IBJJF belt system):** Tracks adult belts (White through Black, Coral, Red) and kids belts (Gray through Green) by age, minimum time-in-grade, and confirmed training days. Professors always make the final promotion decision.
 - **Included Branded Gym App:** Members download BJJ-US free and join via gym invite code; the app immediately reflects the academy's name, logo, and brand colors with no app store rebuild required.
 - **Digital Waivers & Family Accounts:** Parents manage multiple children under one account; trial students sign digital waivers in-app or online before their first class.
 
