@@ -156,6 +156,7 @@
       <section id="step2" hidden>
         <div class="card">
           <h2 data-t="read">Read the waiver</h2>
+          <p id="english-note" hidden style="font-size:14px;color:var(--muted);margin:0 0 10px"></p>
           <div class="waiver-text" id="waiver-text" tabindex="0"></div>
         </div>
 
@@ -240,9 +241,9 @@
         contactGuardian: 'Dados do responsável', first: 'Nome', last: 'Sobrenome', email: 'E-mail',
         phone: 'Telefone', participants: 'Participantes menores de 18', child: 'Criança {n}', remove: 'Remover', dob: 'Data de nascimento',
         addKid: '+ Adicionar outra criança', next: 'Próximo', read: 'Leia o termo', sign: 'Assinar',
-        healthSelf: 'Estou apto(a) a treinar, vou consultar um médico se tiver dúvidas e vou informar meu professor sobre lesões ou condições médicas.',
-        healthKid: 'Como responsável: a criança está apta a treinar, vou consultar um médico se tiver dúvidas e vamos informar o professor sobre lesões ou condições médicas.',
-        esign: 'Concordo em assinar este termo eletronicamente, e que minha assinatura eletrônica vale tanto quanto uma em papel.',
+        // What's signed (healthSelf, healthKid, esign) is never translated: it
+        // falls back to English, the language the waiver is signed in.
+        englishNote: 'O termo e as declarações para assinar ficam em inglês, o idioma em que são assinados.',
         typed: 'Digite seu nome completo', draw: 'Assine aqui com o dedo ou o mouse', drawHint: 'Assine acima da linha',
         clear: 'Limpar assinatura', back: 'Voltar', submit: 'Assinar termo', sending: 'Assinando…',
         doneTitle: 'Assinado. Obrigado!', doneText: 'Enviamos uma cópia para {email}. Até o tatame!',
@@ -281,6 +282,8 @@
     function applyLang() {
       document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
       document.querySelectorAll('[data-t]').forEach((el) => { el.textContent = t(el.dataset.t); });
+      $('english-note').hidden = lang === 'en';
+      $('english-note').textContent = lang === 'en' ? '' : t('englishNote');
       $('lang').textContent = lang === 'pt' ? 'EN' : 'PT';
       if (data) {
         $('privacy-note').textContent = t('privacyNote', { gym: data.gym.name });
